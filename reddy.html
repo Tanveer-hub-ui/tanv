@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Feedback – JSON Output</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+  }
+
+  .container {
+    width: 420px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+  }
+
+  input, select, textarea, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+
+  button {
+    margin-top: 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  pre {
+    background: #eee;
+    padding: 10px;
+    margin-top: 15px;
+    white-space: pre-wrap;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Student Feedback Survey</h2>
+
+  <form id="feedbackForm">
+    <label>Student Name</label>
+    <input type="text" id="name" required>
+
+    <label>Course</label>
+    <input type="text" id="course" required>
+
+    <label>Rating</label>
+    <select id="rating" required>
+      <option value="">Select</option>
+      <option>Excellent</option>
+      <option>Good</option>
+      <option>Average</option>
+      <option>Poor</option>
+    </select>
+
+    <label>Comments</label>
+    <textarea id="comments"></textarea>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <h3>Submitted Feedback (JSON)</h3>
+  <pre id="jsonOutput">{}</pre>
+</div>
+
+<script>
+  const form = document.getElementById("feedbackForm");
+  const jsonOutput = document.getElementById("jsonOutput");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const feedbackJSON = {
+      studentName: document.getElementById("name").value,
+      course: document.getElementById("course").value,
+      rating: document.getElementById("rating").value,
+      comments: document.getElementById("comments").value
+    };
+
+    // Display JSON on screen
+    jsonOutput.textContent = JSON.stringify(feedbackJSON, null, 2);
+
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
